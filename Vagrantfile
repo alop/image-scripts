@@ -8,10 +8,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "hashicorp/precise64"
 
   config.vm.provider "virtualbox" do |v|
-    v.memory = 1024
+    v.memory = 4096
     v.cpus = 2
   end
 
   config.vm.provision "shell", path: "images.sh"
+  config.vm.provision "shell", path: "ubuntu.sh"
+  config.vm.provision "shell", path: "fedora.sh"
 
 end

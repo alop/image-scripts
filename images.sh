@@ -1,11 +1,19 @@
 #!/bin/bash
 
 apt-get update
-apt-get --yes --force-yes install git curl
+apt-get --yes --force-yes install git curl qemu-utils
 
-git clone https://github.com/openstack/diskimage-builder.git
-git clone https://github.com/openstack/tripleo-image-elements.git
-
-export ELEMENTS_PATH=tripleo-image-elements/elements
-diskimage-builder/bin/disk-image-create vm fedora heat-cfntools -a amd64 -o fedora-heat-cfntools
-diskimage-builder/bin/disk-image-create vm ubuntu heat-cfntools -a amd64 -o ubuntu-heat-cfntools
+if [ ! -d diskimage-builder ]
+  then
+    git clone https://github.com/openstack/diskimage-builder.git
+  else
+    cd diskimage-builder
+    git pull
+fi
+if [ ! -d tripleo-image-elements ]
+  then
+    git clone https://github.com/openstack/tripleo-image-elements.git
+  else
+    cd tripleo-image-elements
+    git pull
+fi
