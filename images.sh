@@ -1,7 +1,7 @@
 #!/bin/bash
 
 apt-get update
-apt-get --yes --force-yes install git curl qemu-utils
+apt-get --yes --force-yes install git curl qemu-utils kpartx
 
 if [ ! -d diskimage-builder ]
   then
