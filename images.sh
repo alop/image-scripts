@@ -1,19 +1,11 @@
 #!/bin/bash
 
 apt-get update
-apt-get --yes --force-yes install git curl qemu-utils kpartx
+apt-get --yes --force-yes install git wget qemu-utils kpartx zip qemu-kvm
 
-if [ ! -d diskimage-builder ]
-  then
-    git clone https://github.com/openstack/diskimage-builder.git
-  else
-    cd diskimage-builder
-    git pull
-fi
-if [ ! -d tripleo-image-elements ]
-  then
-    git clone https://github.com/openstack/tripleo-image-elements.git
-  else
-    cd tripleo-image-elements
-    git pull
-fi
+mkdir packer
+cd packer
+wget https://dl.bintray.com/mitchellh/packer/0.6.0_linux_amd64.zip
+unzip 0.6.0_linux_amd64.zip
+
+export PATH=$PATH:~/packer
