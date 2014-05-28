@@ -13,7 +13,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision "shell", path: "images.sh"
-  config.vm.provision "shell", path: "ubuntu.sh"
-  config.vm.provision "shell", path: "fedora.sh"
 
 end
