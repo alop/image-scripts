@@ -36,7 +36,7 @@
       "vm_name": "CentOS6VBox",
       "boot_command":
       [
-        "<tab> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+        "<tab> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks2.cfg<enter><wait>"
       ]
     },
     {
