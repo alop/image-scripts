@@ -1,0 +1,45 @@
+{
+
+  "variables": {
+      "iso_url": "http://centos.expedientevirtual.com/6.5/isos/x86_64/CentOS-6.5-x86_64-minimal.iso",
+      "iso_checksum": "0d9dc37b5dd4befa1c440d2174e88a87",
+      "iso_checksum_type": "md5",
+      "ssh_wait_timeout": "30s",
+      "shutdown_command": "shutdown -P now",
+      "disk_size": 5000
+  },
+  "builders":
+  [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "CentOS_64",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--vram", "16"]
+      ],
+      "iso_url": "{{user `iso_url`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "output_directory": "output_centos_tdhtest",
+      "format": "ovf",
+      "headless": true,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "root",
+      "ssh_password": "s0m3password",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "90m",
+      "vm_name": "tdhtest",
+      "boot_command":
+      [
+        "",
+        " ks=https://gist.githubusercontent.com/alop/c3e9242ad9ca799674c6/raw/c3d80de3201bec254b03ae8d59565c664b1b6a31/gistfile1.txt"
+      ]
+    }
+  ]
+}

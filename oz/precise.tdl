@@ -1,0 +1,21 @@
+<template>
+  <name>my-template</name>
+  <description>Precise template</description>
+  <disk>
+    <size>5</size>
+  </disk>
+  <os>
+   <name>Ubuntu</name>
+   <version>12.04</version>
+   <arch>x86_64</arch>
+   <install type='url'>
+     <url>http://mirror.pnl.gov/ubuntu/dists/precise/main/installer-amd64/current/images/netboot</url>
+   </install>
+   <rootpw>moocow123</rootpw>
+  </os>
+  <commands>
+    <command name='hostname'>
+      echo 'my-template' > /etc/hostname
+    </command>
+  </commands>
+</template>
