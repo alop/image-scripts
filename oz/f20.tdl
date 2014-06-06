@@ -5,7 +5,7 @@
     <version>20</version>
     <arch>x86_64</arch>
     <install type='url'>
-      <url>http://dl.fedoraproject.org/pub/fedora/linux/releases/20/Fedora/x86_64/os/</url>
+      <url>http://mirror.pnl.gov/fedora/linux/releases/20/Fedora/x86_64/os</url>
     </install>
   </os>
   <description>My Fedora 20 x86_64 template</description>
