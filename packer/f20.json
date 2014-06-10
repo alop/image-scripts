@@ -1,0 +1,76 @@
+{
+  "variables": {
+	"mirror": "http://download.fedoraproject.org/pub/fedora/linux",
+      "iso_checksum": "f2eeed5102b8890e9e6f4b9053717fe73031e699c4b76dc7028749ab66e7f917",
+      "iso_checksum_type": "sha256",
+      "ssh_wait_timeout": "10000s",
+      "shutdown_command": "shutdown -P now",
+      "disk_size": 5000
+  },
+  "builders":
+  [
+    {
+      "type": "virtualbox-iso",
+      "guest_os_type": "RedHat_64",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--vram", "16"]
+      ],
+      "iso_url": "{{user `mirror`}}/releases/20/Fedora/x86_64/iso/Fedora-20-x86_64-DVD.iso",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "output_directory": "output_fedora_20",
+      "format": "ovf",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "shutdown_command": "{{user `shutdown_command`}}",
+      "ssh_host_port_max": 2229,
+      "ssh_username": "root",
+      "ssh_password": "fedora",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "vm_name": "Fedora 20",
+      "boot_command":
+      [
+        "<tab> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/f20vb.cfg<enter><wait>"
+      ]
+    },
+    {
+      "type": "qemu",
+      "iso_url": "{{user `mirror`}}/releases/20/Fedora/x86_64/iso/Fedora-20-x86_64-DVD.iso",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "shutdown_command": "{{user `shutdown_command`}}",
+      "disk_size": "{{user `disk_size`}}",
+      "output_directory": "output_fedora_20",
+      "format": "qcow2",
+	"accelerator": "kvm",
+      "headless": false,
+      "http_directory": "httpdir",
+      "http_port_min": 10082,
+      "http_port_max": 10089,
+      "ssh_host_port_min": 2222,
+      "ssh_host_port_max": 2229,
+      "ssh_username": "root",
+      "ssh_password": "fedora",
+      "ssh_port": 22,
+      "ssh_wait_timeout": "{{user `ssh_wait_timeout`}}",
+      "vm_name": "Fedora_20",
+      "net_device": "virtio-net",
+      "disk_interface": "virtio",
+      "boot_command":
+      [
+        "<tab> ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/f20.cfg<enter><wait>"
+      ]
+    }
+  ],
+	"provisioners": [{
+		"type": "shell",
+		"script": "cloud-init.sh"
+		}]
+}
